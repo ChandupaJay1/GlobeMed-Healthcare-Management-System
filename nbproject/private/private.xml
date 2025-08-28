@@ -3,12 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/chand/Documents/NetBeansProjects/GlobeMed%20Healthcare%20Management%20System/src/entity/Doctor.java</file>
             <file>file:/C:/Users/chand/Documents/NetBeansProjects/GlobeMed%20Healthcare%20Management%20System/src/billing/Billing_Frame.java</file>
-            <file>file:/C:/Users/chand/Documents/NetBeansProjects/GlobeMed%20Healthcare%20Management%20System/src/home/Main_Frame.java</file>
-            <file>file:/C:/Users/chand/Documents/NetBeansProjects/GlobeMed%20Healthcare%20Management%20System/src/login/Login_Frame.java</file>
-            <file>file:/C:/Users/chand/Documents/NetBeansProjects/GlobeMed%20Healthcare%20Management%20System/src/patient/Patient_Frame.java</file>
-            <file>file:/C:/Users/chand/Documents/NetBeansProjects/GlobeMed%20Healthcare%20Management%20System/src/staff/StaffGroup.java</file>
-            <file>file:/C:/Users/chand/Documents/NetBeansProjects/GlobeMed%20Healthcare%20Management%20System/src/staff/StaffComponent.java</file>
+            <file>file:/C:/Users/chand/Documents/NetBeansProjects/GlobeMed%20Healthcare%20Management%20System/src/patient/AuthorizationDecorator.java</file>
+            <file>file:/C:/Users/chand/Documents/NetBeansProjects/GlobeMed%20Healthcare%20Management%20System/src/entity/BillingRequest.java</file>
+            <file>file:/C:/Users/chand/Documents/NetBeansProjects/GlobeMed%20Healthcare%20Management%20System/src/entity/PatientSchedule.java</file>
+            <file>file:/C:/Users/chand/Documents/NetBeansProjects/GlobeMed%20Healthcare%20Management%20System/src/appoinment/Appoinment_Frame.java</file>
+            <file>file:/C:/Users/chand/Documents/NetBeansProjects/GlobeMed%20Healthcare%20Management%20System/src/report/Reports.java</file>
         </group>
     </open-files>
 </project-private>

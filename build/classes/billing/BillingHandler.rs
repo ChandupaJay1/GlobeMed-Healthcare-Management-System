@@ -1,0 +1,10 @@
+billing.MedicationBillingHandler
+billing.BillingHandler
+billing.InsuranceClaimHandler
+billing.TreatmentBillingHandler
+billing.ConsultationBillingHandler
+billing.SpecialistChannelingHandler
+billing.LaboratoryTestsBillingHandler
+billing.PhysiotherapyBillingHandler
+billing.VaccinationsBillingHandler
+billing.SpecialistChannelingClaimHandler

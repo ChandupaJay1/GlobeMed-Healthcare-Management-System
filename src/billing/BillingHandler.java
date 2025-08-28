@@ -39,7 +39,7 @@ class LaboratoryTestsBillingHandler extends BillingHandler {
 
     @Override
     public void process(BillingRequest request) {
-        if (request.getServices().contains("LaboratoryTests")) {
+        if (request.getServices().contains("Laboratory Tests")) {
             request.addAmount(100.0); // example charge
             System.out.println("Treatment charge added: $100");
         }
