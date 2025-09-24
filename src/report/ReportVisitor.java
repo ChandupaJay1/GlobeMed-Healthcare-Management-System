@@ -22,7 +22,7 @@ class TreatmentReportVisitor implements ReportVisitor {
     @Override
     public void visit(Patient patient) {
         System.out.println("Generating treatment summary for patient: " + patient.getName());
-        // extract treatments
+       
     }
 
     @Override
@@ -32,11 +32,13 @@ class TreatmentReportVisitor implements ReportVisitor {
 
     @Override
     public void visit(Billing billing) {
-        // not needed for treatment report, can leave empty or log
+        
     }
 }
 
-class FinancialReportVisitor implements ReportVisitor {
+class
+
+FinancialReportVisitor implements ReportVisitor {
 
     @Override
     public void visit(Patient patient) {
@@ -45,7 +47,7 @@ class FinancialReportVisitor implements ReportVisitor {
 
     @Override
     public void visit(Doctor doctor) {
-        // maybe include doctor fees
+        
         System.out.println("Doctor fees included for: " + doctor.getName());
     }
 

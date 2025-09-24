@@ -27,7 +27,7 @@ public class StaffGroup implements StaffComponent{
 
     @Override
     public boolean hasPermission(String permission) {
-        // Returns true if any member in the group has the permission
+        
         for (StaffComponent staff : staffList) {
             if (staff.hasPermission(permission)) {
                 return true;

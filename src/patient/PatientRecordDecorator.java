@@ -8,20 +8,20 @@ package patient;
  *
  * @author chand
  */
-public abstract class PatientRecordDecorator implements PatientRecord {
-    protected PatientRecord patientRecord;
+abstract class PatientRecordDecorator implements PatientRecord {
+    protected PatientRecord wrappedRecord;
 
     public PatientRecordDecorator(PatientRecord patientRecord) {
-        this.patientRecord = patientRecord;
+        this.wrappedRecord = patientRecord;
     }
 
     @Override
     public void save(String data) {
-        patientRecord.save(data);
+        wrappedRecord.save(data);
     }
 
     @Override
     public String load() {
-        return patientRecord.load();
+        return wrappedRecord.load();
     }
 }

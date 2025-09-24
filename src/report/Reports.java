@@ -58,7 +58,7 @@ public class Reports extends JDialog {
         setModal(true);
 
         // Modern Header Panel - Updated Colors
-        headerPanel.setBackground(new Color(37, 99, 235)); // Modern blue
+        headerPanel.setBackground(new Color(129, 123, 123)); // Modern blue
         headerPanel.setBorder(BorderFactory.createEmptyBorder(20, 25, 20, 25));
         headerPanel.setLayout(new BorderLayout());
 
@@ -68,7 +68,7 @@ public class Reports extends JDialog {
         headerPanel.add(titleLabel, BorderLayout.WEST);
 
         dateLabel.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-        dateLabel.setForeground(new Color(191, 219, 254)); // Light blue
+        dateLabel.setForeground(new Color(0, 0, 0)); // Light blue
         dateLabel.setText("Generated: " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMM dd, yyyy HH:mm")));
         headerPanel.add(dateLabel, BorderLayout.EAST);
 
@@ -84,19 +84,19 @@ public class Reports extends JDialog {
         treatmentReportArea.setFont(new Font("JetBrains Mono", Font.PLAIN, 12));
         treatmentReportArea.setRows(5);
         treatmentReportArea.setMargin(new Insets(20, 20, 20, 20));
-        treatmentReportArea.setBackground(new Color(249, 250, 251));
-        treatmentReportArea.setForeground(new Color(17, 24, 39));
+        treatmentReportArea.setBackground(new Color(248, 248, 248));//report background
+        treatmentReportArea.setForeground(new Color(37, 37, 39));
         treatmentScrollPane.setViewportView(treatmentReportArea);
         treatmentScrollPane.setBorder(BorderFactory.createTitledBorder(
-                BorderFactory.createLineBorder(new Color(209, 213, 219), 1),
+                BorderFactory.createLineBorder(new Color(0, 0, 0), 1),
                 "Treatment Summary Report",
                 javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION,
                 javax.swing.border.TitledBorder.DEFAULT_POSITION,
                 new Font("Segoe UI", Font.BOLD, 14),
-                new Color(75, 85, 99)));
+                new Color(0, 0, 0)));
 
         treatmentPanel.add(treatmentScrollPane, BorderLayout.CENTER);
-        tabbedPane.addTab("📋 Treatment Report", new ImageIcon(), treatmentPanel, "View treatment details and patient information");
+        tabbedPane.addTab("Treatment Report", new ImageIcon(), treatmentPanel, "View treatment details and patient information");
 
         // Financial Report Tab - Updated styling
         financialPanel.setLayout(new BorderLayout());
@@ -108,7 +108,7 @@ public class Reports extends JDialog {
         financialReportArea.setFont(new Font("JetBrains Mono", Font.PLAIN, 12));
         financialReportArea.setRows(5);
         financialReportArea.setMargin(new Insets(20, 20, 20, 20));
-        financialReportArea.setBackground(new Color(249, 250, 251));
+        financialReportArea.setBackground(new Color(249, 250, 251));//second report background
         financialReportArea.setForeground(new Color(17, 24, 39));
         financialScrollPane.setViewportView(financialReportArea);
         financialScrollPane.setBorder(BorderFactory.createTitledBorder(
@@ -117,14 +117,14 @@ public class Reports extends JDialog {
                 javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION,
                 javax.swing.border.TitledBorder.DEFAULT_POSITION,
                 new Font("Segoe UI", Font.BOLD, 14),
-                new Color(75, 85, 99)));
+                new Color(0, 0, 0)));
 
         financialPanel.add(financialScrollPane, BorderLayout.CENTER);
-        tabbedPane.addTab("💰 Financial Report", new ImageIcon(), financialPanel, "View billing and financial information");
+        tabbedPane.addTab("Financial Report", new ImageIcon(), financialPanel, "View billing and financial information");
 
         // Modern Tab Styling
         tabbedPane.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-        tabbedPane.setBackground(new Color(243, 244, 246));
+        tabbedPane.setBackground(new Color(28, 27, 27));
         getContentPane().add(tabbedPane, BorderLayout.CENTER);
 
         // Modern Button Panel - Updated placement and styling
@@ -136,7 +136,7 @@ public class Reports extends JDialog {
         buttonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 12, 0));
 
         // Modern Print Button
-        printButton.setText("🖨️ Print Report");
+        printButton.setText("Print Report");
         printButton.setBackground(new Color(245, 158, 11)); // Amber
         printButton.setForeground(Color.WHITE);
         printButton.setFont(new Font("Segoe UI", Font.PLAIN, 13));
@@ -147,7 +147,7 @@ public class Reports extends JDialog {
         buttonPanel.add(printButton);
 
         // Modern Save Button
-        saveButton.setText("📤 Export");
+        saveButton.setText("Export");
         saveButton.setBackground(new Color(16, 185, 129)); // Emerald
         saveButton.setForeground(Color.WHITE);
         saveButton.setFont(new Font("Segoe UI", Font.PLAIN, 13));
@@ -158,7 +158,7 @@ public class Reports extends JDialog {
         buttonPanel.add(saveButton);
 
         // Modern Close Button
-        closeButton.setText("✕ Close");
+        closeButton.setText("Close");
         closeButton.setBackground(new Color(107, 114, 128)); // Gray
         closeButton.setForeground(Color.WHITE);
         closeButton.setFont(new Font("Segoe UI", Font.PLAIN, 13));

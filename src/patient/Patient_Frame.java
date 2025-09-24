@@ -15,7 +15,6 @@ import java.awt.event.ActionListener;
  */
 public class Patient_Frame extends JDialog {
 
-    // UI Components
     private JTextField patientNameField;
     private JTextArea recordDataArea;
     private JTextArea outputArea;
@@ -28,7 +27,6 @@ public class Patient_Frame extends JDialog {
     private JButton clearButton;
     private JLabel statusLabel;
 
-    // Current patient record
     private PatientRecord currentRecord;
 
     /**
@@ -47,41 +45,34 @@ public class Patient_Frame extends JDialog {
     @SuppressWarnings("unchecked")
     private void initComponents() {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Patient Records Management System");
+        setTitle("Patient Records Management");
         setSize(900, 600);
 
-        // Main panel with simple layout
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
 
-        // Title
-        JLabel titleLabel = new JLabel("Patient Records Management System");
+        JLabel titleLabel = new JLabel("Patient Records Management");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 18));
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         mainPanel.add(titleLabel);
         mainPanel.add(Box.createVerticalStrut(20));
 
-        // Patient Info Section
         JPanel patientPanel = createPatientInfoSection();
         mainPanel.add(patientPanel);
         mainPanel.add(Box.createVerticalStrut(15));
 
-        // Decorators Section
         JPanel decoratorPanel = createDecoratorsSection();
         mainPanel.add(decoratorPanel);
         mainPanel.add(Box.createVerticalStrut(15));
 
-        // Buttons Section
         JPanel buttonPanel = createButtonsSection();
         mainPanel.add(buttonPanel);
         mainPanel.add(Box.createVerticalStrut(15));
 
-        // Output Section
         JPanel outputPanel = createOutputSection();
         mainPanel.add(outputPanel);
 
-        // Status bar
         statusLabel = new JLabel("Ready");
         statusLabel.setBorder(BorderFactory.createEmptyBorder(5, 0, 0, 0));
         mainPanel.add(statusLabel);
@@ -96,19 +87,19 @@ public class Patient_Frame extends JDialog {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
 
-        // Patient Name
-        gbc.gridx = 0; gbc.gridy = 0;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.WEST;
         panel.add(new JLabel("Patient Name:"), gbc);
 
         gbc.gridx = 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 1.0;
-        patientNameField = new JTextField("Kasun", 20);
+        patientNameField = new JTextField("Joel", 20);
         panel.add(patientNameField, gbc);
 
-        // Medical Record
-        gbc.gridx = 0; gbc.gridy = 1;
+        gbc.gridx = 0;
+        gbc.gridy = 1;
         gbc.anchor = GridBagConstraints.NORTHWEST;
         gbc.fill = GridBagConstraints.NONE;
         gbc.weightx = 0;
@@ -136,8 +127,8 @@ public class Patient_Frame extends JDialog {
         gbc.insets = new Insets(5, 5, 5, 5);
         gbc.anchor = GridBagConstraints.WEST;
 
-        // First row of checkboxes
-        gbc.gridx = 0; gbc.gridy = 0;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
         loggingCheckBox = new JCheckBox("Logging", true);
         panel.add(loggingCheckBox, gbc);
 
@@ -149,8 +140,8 @@ public class Patient_Frame extends JDialog {
         authorizationCheckBox = new JCheckBox("Authorization", true);
         panel.add(authorizationCheckBox, gbc);
 
-        // User Role
-        gbc.gridx = 0; gbc.gridy = 1;
+        gbc.gridx = 0;
+        gbc.gridy = 1;
         panel.add(new JLabel("User Role:"), gbc);
 
         gbc.gridx = 1;
@@ -224,16 +215,13 @@ public class Patient_Frame extends JDialog {
                 return;
             }
 
-            // Capture output
             java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
             java.io.PrintStream ps = new java.io.PrintStream(baos);
             java.io.PrintStream oldOut = System.out;
             System.setOut(ps);
 
-            // Create the decorated record
             currentRecord = buildDecoratedRecord(patientName);
 
-            // Save the record
             outputArea.append("=== SAVING RECORD ===\n");
             outputArea.append("Patient: " + patientName + "\n");
             outputArea.append("Data: " + recordData + "\n");
@@ -241,7 +229,6 @@ public class Patient_Frame extends JDialog {
 
             currentRecord.save(recordData);
 
-            // Restore output and capture what was printed
             System.out.flush();
             System.setOut(oldOut);
             String capturedOutput = baos.toString();
@@ -266,20 +253,17 @@ public class Patient_Frame extends JDialog {
                 return;
             }
 
-            // Capture output
             java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
             java.io.PrintStream ps = new java.io.PrintStream(baos);
             java.io.PrintStream oldOut = System.out;
             System.setOut(ps);
 
-            // Load the record
             outputArea.append("=== LOADING RECORD ===\n");
             outputArea.append("Patient: " + patientNameField.getText() + "\n");
             outputArea.append("Active Decorators: " + getActiveDecorators() + "\n\n");
 
             String loadedData = currentRecord.load();
 
-            // Restore output and capture what was printed
             System.out.flush();
             System.setOut(oldOut);
             String capturedOutput = baos.toString();
@@ -299,10 +283,9 @@ public class Patient_Frame extends JDialog {
     }
 
     private PatientRecord buildDecoratedRecord(String patientName) {
-        // Start with basic record
+
         PatientRecord record = new BasicPatientRecord(patientName);
 
-        // Apply decorators in order based on checkboxes
         if (loggingCheckBox.isSelected()) {
             record = new LoggingDecorator(record);
         }

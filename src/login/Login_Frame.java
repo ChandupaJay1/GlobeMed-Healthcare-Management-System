@@ -4,6 +4,7 @@
  */
 package login;
 
+import com.formdev.flatlaf.FlatDarculaLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import home.Main_Frame;
 import java.awt.Component;
@@ -166,12 +167,12 @@ public class Login_Frame extends javax.swing.JFrame {
             StaffGroup hospitalStaff = new StaffGroup("Hospital Staff");
 
             if (personalRole.equals("Doctor")) {
-                if (username.equals("Kasun") && password.equals("1234")) {
+                if (username.equals("Chathura") && password.equals("1234")) {
 
                     Set<String> doctorPerms = new HashSet<>();
                     doctorPerms.add("view_patient_records");
                     doctorPerms.add("prescribe_medication");
-                    StaffComponent doctor = new StaffMember("Dr. Kasun", doctorPerms);
+                    StaffComponent doctor = new StaffMember("Dr. Chathura", doctorPerms);
                     hospitalStaff.add(doctor);
 
                     Main_Frame home = new Main_Frame(doctor);
@@ -182,11 +183,11 @@ public class Login_Frame extends javax.swing.JFrame {
                 }
             }
             if (personalRole.equals("Nurse")) {
-                if (username.equals("Shasha") && password.equals("1234")) {
+                if (username.equals("Malee") && password.equals("1234")) {
 
                     Set<String> nursePerms = new HashSet<>();
                     nursePerms.add("view_patient_records");
-                    StaffComponent nurse = new StaffMember("Nurse Shasha", nursePerms);
+                    StaffComponent nurse = new StaffMember("Nurse Malee", nursePerms);
                     hospitalStaff.add(nurse);
 
                     Main_Frame home = new Main_Frame(nurse);
@@ -197,12 +198,12 @@ public class Login_Frame extends javax.swing.JFrame {
                 }
             }
             if (personalRole.equals("Admin")) {
-                if (username.equals("Kavindu") && password.equals("1234")) {
+                if (username.equals("Chandupa") && password.equals("1234")) {
 
                     Set<String> adminPerms = new HashSet<>();
                     adminPerms.add("manage_appointments");
                     adminPerms.add("manage_billing");
-                    StaffComponent admin = new StaffMember("Admin Kavindu", adminPerms);
+                    StaffComponent admin = new StaffMember("Admin Chandupa", adminPerms);
                     hospitalStaff.add(admin);
 
                     Main_Frame home = new Main_Frame(admin);
@@ -224,7 +225,7 @@ public class Login_Frame extends javax.swing.JFrame {
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         try {
-            FlatMacLightLaf.setup();
+            FlatDarculaLaf.setup();
         } catch (Exception ex) {
             System.err.println("Failed to initialize LaF");
         }

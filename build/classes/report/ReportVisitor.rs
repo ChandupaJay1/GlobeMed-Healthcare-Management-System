@@ -1,6 +1,0 @@
-report.ReportVisitor
-reports.TreatmentReportVisitor
-report.TreatmentReportVisitor
-report.FinancialReportVisitor
-reports.ReportVisitor
-reports.FinancialReportVisitor

@@ -13,7 +13,7 @@ import report.Reports;
 
 /**
  *
- * @author dulan
+ * @author chand
  */
 public class DataInputDialog extends JDialog {
 
@@ -26,14 +26,18 @@ public class DataInputDialog extends JDialog {
     private JTextArea dataPreviewArea;
     private JFrame parentFrame;
 
-    // Modern Color Palette
-    private static final Color PRIMARY = new Color(37, 99, 235);
-    private static final Color SUCCESS = new Color(16, 185, 129);
-    private static final Color WARNING = new Color(245, 158, 11);
-    private static final Color DANGER = new Color(239, 68, 68);
-    private static final Color GRAY_50 = new Color(249, 250, 251);
-    private static final Color GRAY_100 = new Color(243, 244, 246);
-    private static final Color GRAY_600 = new Color(75, 85, 99);
+    // FlatDarculaLaf Compatible Color Palette
+    // These colors work well with FlatDarculaLaf's base theme
+    private static final Color PRIMARY = new Color(98, 151, 255);      // Darcula blue accent
+    private static final Color SUCCESS = new Color(98, 187, 70);       // Green accent
+    private static final Color WARNING = new Color(255, 156, 67);      // Orange accent
+    private static final Color DANGER = new Color(255, 108, 108);      // Red accent
+    private static final Color BROWN = new Color(187, 134, 88);        // Brown for reports
+
+    // Let FlatDarculaLaf handle most background/text colors,
+    // but define some for custom styling
+    private static final Color DARK_SURFACE = new Color(43, 43, 43);
+    private static final Color DARK_ELEVATED = new Color(54, 54, 54);
 
     /**
      * Creates new form DataInputDialog
@@ -80,67 +84,44 @@ public class DataInputDialog extends JDialog {
         setTitle("Medical Data Entry");
         setModal(true);
 
+        // Main panel - let FlatDarculaLaf handle background
         mainPanel.setLayout(new BorderLayout());
-        mainPanel.setBackground(Color.WHITE);
 
         inputPanel.setLayout(new BoxLayout(inputPanel, BoxLayout.Y_AXIS));
         inputPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 15));
-        inputPanel.setBackground(Color.WHITE);
 
-        // Patient Panel - Updated styling
+        // Patient Panel with enhanced styling
         patientPanel.setBorder(BorderFactory.createTitledBorder(
-                BorderFactory.createLineBorder(GRAY_100, 1),
-                "Patient Information",
-                javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION,
-                javax.swing.border.TitledBorder.DEFAULT_POSITION,
-                new Font("Segoe UI", Font.BOLD, 13),
-                GRAY_600));
+                "Patient Information"));
         patientPanel.setLayout(new GridBagLayout());
-        patientPanel.setBackground(Color.WHITE);
 
         nameLabel.setText("Patient Name:");
         nameLabel.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-        nameLabel.setForeground(GRAY_600);
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0; gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.WEST;
         gbc.insets = new Insets(8, 8, 8, 8);
         patientPanel.add(nameLabel, gbc);
 
-        patientNameField.setPreferredSize(new Dimension(200, 30));
+        patientNameField.setPreferredSize(new Dimension(200, 32));
         patientNameField.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-        patientNameField.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(GRAY_100, 1),
-                BorderFactory.createEmptyBorder(5, 8, 5, 8)
-        ));
         gbc.gridx = 1; gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 1.0;
         patientPanel.add(patientNameField, gbc);
 
         diagnosisLabel.setText("Diagnosis:");
         diagnosisLabel.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-        diagnosisLabel.setForeground(GRAY_600);
         gbc.gridx = 0; gbc.gridy = 1; gbc.weightx = 0;
         gbc.fill = GridBagConstraints.NONE;
         patientPanel.add(diagnosisLabel, gbc);
 
-        diagnosisField.setPreferredSize(new Dimension(200, 30));
+        diagnosisField.setPreferredSize(new Dimension(200, 32));
         diagnosisField.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-        diagnosisField.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(GRAY_100, 1),
-                BorderFactory.createEmptyBorder(5, 8, 5, 8)
-        ));
         gbc.gridx = 1; gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 1.0;
         patientPanel.add(diagnosisField, gbc);
 
-        addPatientButton.setText("Add Patient");
-        addPatientButton.setBackground(SUCCESS);
-        addPatientButton.setForeground(Color.WHITE);
-        addPatientButton.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-        addPatientButton.setFocusPainted(false);
-        addPatientButton.setBorder(BorderFactory.createEmptyBorder(8, 16, 8, 16));
-        addPatientButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        addPatientButton = createAccentButton("Add Patient", SUCCESS);
         addPatientButton.addActionListener(evt -> addPatientButtonActionPerformed(evt));
         gbc.gridx = 0; gbc.gridy = 2; gbc.gridwidth = 2;
         gbc.insets = new Insets(15, 8, 8, 8);
@@ -149,39 +130,26 @@ public class DataInputDialog extends JDialog {
         inputPanel.add(patientPanel);
         inputPanel.add(Box.createVerticalStrut(15));
 
-        // Doctor Panel - Updated styling
-        doctorPanel.setBorder(BorderFactory.createTitledBorder(
-                BorderFactory.createLineBorder(GRAY_100, 1),
-                "Doctor Information",
-                javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION,
-                javax.swing.border.TitledBorder.DEFAULT_POSITION,
-                new Font("Segoe UI", Font.BOLD, 13),
-                GRAY_600));
+        // Doctor Panel
+        doctorPanel.setBorder(BorderFactory.createTitledBorder("Doctor Information"));
         doctorPanel.setLayout(new GridBagLayout());
-        doctorPanel.setBackground(Color.WHITE);
 
         doctorNameLabel.setText("Doctor Name:");
         doctorNameLabel.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-        doctorNameLabel.setForeground(GRAY_600);
         gbc = new GridBagConstraints();
         gbc.gridx = 0; gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.WEST;
         gbc.insets = new Insets(8, 8, 8, 8);
         doctorPanel.add(doctorNameLabel, gbc);
 
-        doctorNameField.setPreferredSize(new Dimension(200, 30));
+        doctorNameField.setPreferredSize(new Dimension(200, 32));
         doctorNameField.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-        doctorNameField.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(GRAY_100, 1),
-                BorderFactory.createEmptyBorder(5, 8, 5, 8)
-        ));
         gbc.gridx = 1; gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 1.0;
         doctorPanel.add(doctorNameField, gbc);
 
         specializationLabel.setText("Specialization:");
         specializationLabel.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-        specializationLabel.setForeground(GRAY_600);
         gbc.gridx = 0; gbc.gridy = 1; gbc.weightx = 0;
         gbc.fill = GridBagConstraints.NONE;
         doctorPanel.add(specializationLabel, gbc);
@@ -191,18 +159,12 @@ public class DataInputDialog extends JDialog {
                 "Pediatrician", "Psychiatrist", "Surgeon", "Other"
         }));
         specializationCombo.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-        specializationCombo.setPreferredSize(new Dimension(200, 30));
+        specializationCombo.setPreferredSize(new Dimension(200, 32));
         gbc.gridx = 1; gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 1.0;
         doctorPanel.add(specializationCombo, gbc);
 
-        addDoctorButton.setText("Add Doctor");
-        addDoctorButton.setBackground(PRIMARY);
-        addDoctorButton.setForeground(Color.WHITE);
-        addDoctorButton.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-        addDoctorButton.setFocusPainted(false);
-        addDoctorButton.setBorder(BorderFactory.createEmptyBorder(8, 16, 8, 16));
-        addDoctorButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        addDoctorButton = createAccentButton("Add Doctor", PRIMARY);
         addDoctorButton.addActionListener(evt -> addDoctorButtonActionPerformed(evt));
         gbc.gridx = 0; gbc.gridy = 2; gbc.gridwidth = 2;
         gbc.insets = new Insets(15, 8, 8, 8);
@@ -211,43 +173,25 @@ public class DataInputDialog extends JDialog {
         inputPanel.add(doctorPanel);
         inputPanel.add(Box.createVerticalStrut(15));
 
-        // Billing Panel - Updated styling
-        billingPanel.setBorder(BorderFactory.createTitledBorder(
-                BorderFactory.createLineBorder(GRAY_100, 1),
-                "Billing Information",
-                javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION,
-                javax.swing.border.TitledBorder.DEFAULT_POSITION,
-                new Font("Segoe UI", Font.BOLD, 13),
-                GRAY_600));
+        // Billing Panel
+        billingPanel.setBorder(BorderFactory.createTitledBorder("Billing Information"));
         billingPanel.setLayout(new GridBagLayout());
-        billingPanel.setBackground(Color.WHITE);
 
         amountLabel.setText("Amount ($):");
         amountLabel.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-        amountLabel.setForeground(GRAY_600);
         gbc = new GridBagConstraints();
         gbc.gridx = 0; gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.WEST;
         gbc.insets = new Insets(8, 8, 8, 8);
         billingPanel.add(amountLabel, gbc);
 
-        billingAmountField.setPreferredSize(new Dimension(200, 30));
+        billingAmountField.setPreferredSize(new Dimension(200, 32));
         billingAmountField.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-        billingAmountField.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(GRAY_100, 1),
-                BorderFactory.createEmptyBorder(5, 8, 5, 8)
-        ));
         gbc.gridx = 1; gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 1.0;
         billingPanel.add(billingAmountField, gbc);
 
-        addBillingButton.setText("Add Billing");
-        addBillingButton.setBackground(WARNING);
-        addBillingButton.setForeground(Color.WHITE);
-        addBillingButton.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-        addBillingButton.setFocusPainted(false);
-        addBillingButton.setBorder(BorderFactory.createEmptyBorder(8, 16, 8, 16));
-        addBillingButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        addBillingButton = createAccentButton("Add Billing", WARNING);
         addBillingButton.addActionListener(evt -> addBillingButtonActionPerformed(evt));
         gbc.gridx = 0; gbc.gridy = 1; gbc.gridwidth = 2;
         gbc.insets = new Insets(15, 8, 8, 8);
@@ -257,73 +201,81 @@ public class DataInputDialog extends JDialog {
 
         mainPanel.add(inputPanel, BorderLayout.WEST);
 
-        // Preview Panel - Updated styling
-        previewPanel.setBorder(BorderFactory.createTitledBorder(
-                BorderFactory.createLineBorder(GRAY_100, 1),
-                "Data Preview",
-                javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION,
-                javax.swing.border.TitledBorder.DEFAULT_POSITION,
-                new Font("Segoe UI", Font.BOLD, 13),
-                GRAY_600));
+        // Preview Panel
+        previewPanel.setBorder(BorderFactory.createTitledBorder("Data Preview"));
         previewPanel.setLayout(new BorderLayout());
-        previewPanel.setBackground(Color.WHITE);
 
         dataPreviewArea.setEditable(false);
         dataPreviewArea.setColumns(35);
         dataPreviewArea.setFont(new Font("JetBrains Mono", Font.PLAIN, 12));
         dataPreviewArea.setRows(20);
         dataPreviewArea.setMargin(new Insets(15, 15, 15, 15));
-        dataPreviewArea.setBackground(GRAY_50);
-        dataPreviewArea.setForeground(GRAY_600);
+        // Let FlatDarculaLaf handle text area colors, but make it slightly elevated
+        dataPreviewArea.setBackground(DARK_ELEVATED);
         previewScrollPane.setViewportView(dataPreviewArea);
-        previewScrollPane.setBorder(null);
 
         previewPanel.add(previewScrollPane, BorderLayout.CENTER);
         mainPanel.add(previewPanel, BorderLayout.CENTER);
 
         getContentPane().add(mainPanel, BorderLayout.CENTER);
 
-        // Button Panel - Updated placement and styling
-        buttonPanel.setBackground(Color.WHITE);
-        buttonPanel.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createMatteBorder(1, 0, 0, 0, GRAY_100),
-                BorderFactory.createEmptyBorder(15, 20, 15, 20)
-        ));
+        // Button Panel
         buttonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 12, 0));
+        buttonPanel.setBorder(BorderFactory.createEmptyBorder(15, 20, 15, 20));
 
-        generateReportButton.setText("Generate Report");
-        generateReportButton.setBackground(new Color(139, 69, 19)); // Brown for reports
-        generateReportButton.setForeground(Color.WHITE);
-        generateReportButton.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-        generateReportButton.setFocusPainted(false);
-        generateReportButton.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
-        generateReportButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        generateReportButton = createAccentButton("Generate Report", BROWN);
         generateReportButton.addActionListener(evt -> generateReportButtonActionPerformed(evt));
         buttonPanel.add(generateReportButton);
 
-        clearButton.setText("Clear All");
-        clearButton.setBackground(DANGER);
-        clearButton.setForeground(Color.WHITE);
-        clearButton.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-        clearButton.setFocusPainted(false);
-        clearButton.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
-        clearButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        clearButton = createAccentButton("Clear All", DANGER);
         clearButton.addActionListener(evt -> clearButtonActionPerformed(evt));
         buttonPanel.add(clearButton);
 
+        // Cancel button uses default styling to blend with theme
         cancelButton.setText("Cancel");
-        cancelButton.setBackground(GRAY_600);
-        cancelButton.setForeground(Color.WHITE);
         cancelButton.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-        cancelButton.setFocusPainted(false);
-        cancelButton.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
-        cancelButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         cancelButton.addActionListener(evt -> cancelButtonActionPerformed(evt));
         buttonPanel.add(cancelButton);
 
         getContentPane().add(buttonPanel, BorderLayout.SOUTH);
 
         pack();
+    }
+
+    // Helper method to create accent-colored buttons that work with FlatDarculaLaf
+    private JButton createAccentButton(String text, Color accentColor) {
+        JButton button = new JButton(text);
+        button.setBackground(accentColor);
+        button.setForeground(Color.WHITE);
+        button.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+        button.setFocusPainted(false);
+        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+        // Add subtle hover effect
+        button.addMouseListener(new java.awt.event.MouseAdapter() {
+            Color originalColor = accentColor;
+
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                button.setBackground(brightenColor(originalColor));
+            }
+
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                button.setBackground(originalColor);
+            }
+        });
+
+        return button;
+    }
+
+    // Helper method to brighten colors for hover effects
+    private Color brightenColor(Color color) {
+        float factor = 1.1f;
+        int r = Math.min(255, (int)(color.getRed() * factor));
+        int g = Math.min(255, (int)(color.getGreen() * factor));
+        int b = Math.min(255, (int)(color.getBlue() * factor));
+        return new Color(r, g, b);
     }
 
     private void addPatientButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -459,19 +411,18 @@ public class DataInputDialog extends JDialog {
     }
 
     public static void main(String args[]) {
-        try {
-            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DataInputDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
+        // Since you're using FlatDarculaLaf.setup() for the whole system,
+        // no need to set Look & Feel here - it's already configured
+
+        // Optional: Set additional properties for better rendering
+        System.setProperty("awt.useSystemAAFontSettings", "on");
+        System.setProperty("swing.aatext", "true");
 
         java.awt.EventQueue.invokeLater(() -> {
-            DataInputDialog dialog = new DataInputDialog(new JFrame());
+            // Create parent frame - FlatDarculaLaf will handle the theming
+            JFrame parentFrame = new JFrame();
+
+            DataInputDialog dialog = new DataInputDialog(parentFrame);
             dialog.setVisible(true);
         });
     }

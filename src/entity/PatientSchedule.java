@@ -14,7 +14,7 @@ public class PatientSchedule {
     private String patientMobile;
     private String appointedTime;
     private Doctor doctor;
-    private String location; // optional for multi-location
+    private String location; 
 
     public PatientSchedule(String patientId, String patientName, String patientMobile, String appointedTime, Doctor doctor, String location) {
         this.patientId = patientId;

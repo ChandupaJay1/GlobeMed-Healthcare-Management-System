@@ -150,12 +150,6 @@ public class Main_Frame extends javax.swing.JFrame {
         } else {
             jButton1.setEnabled(false);
         }
-
-//        if (loggedInStaff.hasPermission("prescribe_medication")) {
-//            btnPrescribe.setEnabled(true);
-//        } else {
-//            btnPrescribe.setEnabled(false);
-//        }
         if (loggedInStaff.hasPermission("manage_appointments")) {
             jButton2.setEnabled(true);
         } else {
@@ -206,13 +200,11 @@ public class Main_Frame extends javax.swing.JFrame {
 
         // If user confirms logout
         if (option == JOptionPane.YES_OPTION) {
-            // Clear the logged in staff
+
             this.loggedInStaff = null;
 
-            // Dispose current frame
             this.dispose();
 
-            // Create and show Login_Frame
             Login_Frame loginFrame = new Login_Frame();
             loginFrame.setVisible(true);
         }

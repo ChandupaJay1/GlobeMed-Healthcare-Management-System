@@ -13,7 +13,7 @@ import java.util.List;
 public class BillingRequest {
     private String patientId;
     private String patientName;
-    private List<String> services; // e.g., "Consultation", "Treatment", "Medication"
+    private List<String> services; 
     private boolean hasInsurance;
     private double totalAmount;
 

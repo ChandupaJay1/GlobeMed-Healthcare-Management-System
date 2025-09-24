@@ -55,7 +55,6 @@ public class Doctor {
         this.workTime = workTime;
     }
 
-    // For debugging / table display
     @Override
     public String toString() {
         return name + " (" + specialty + ")";

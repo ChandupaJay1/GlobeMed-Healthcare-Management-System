@@ -68,8 +68,8 @@ class InsuranceClaimHandler extends BillingHandler {
     @Override
     public void process(BillingRequest request) {
         if (request.hasInsurance()) {
-            System.out.println("Insurance claim processed for patient: " + request.getPatientName());
-            request.addAmount(-request.getTotalAmount() * 0.8); // assume insurance covers 80%
+            System.out.println("Insurance claim process done for patient: " + request.getPatientName());
+            request.addAmount(-request.getTotalAmount() * 0.5); // 
         }
         if (nextHandler != null) {
             nextHandler.process(request);
